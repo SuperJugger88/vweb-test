@@ -7,7 +7,7 @@ pub fn get_users(token string) ![]User {
 	mut header := http.new_header()
 	header.add_custom('token', token)!
 
-	url := 'http://localhost:8082/controller/users'
+	url := 'http://localhost:${port}/controller/users'
 
 	mut config := http.FetchConfig{
 		header: header
@@ -23,7 +23,7 @@ pub fn get_user(token string) !User {
 	mut header := http.new_header()
 	header.add_custom('token', token)!
 
-	url := 'http://localhost:8082/controller/user'
+	url := 'http://localhost:${port}/controller/user'
 
 	mut config := http.FetchConfig{
 		header: header

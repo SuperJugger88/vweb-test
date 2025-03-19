@@ -6,7 +6,7 @@ import net.http
 pub fn get_products(token string) ![]Product {
 	mut header := http.new_header()
 	header.add_custom('token', token)!
-	url := 'http://localhost:8082/controller/products'
+	url := 'http://localhost:${port}/controller/products'
 
 	mut config := http.FetchConfig{
 		header: header
@@ -22,7 +22,7 @@ pub fn get_product(token string) ![]User {
 	mut header := http.new_header()
 	header.add_custom('token', token)!
 
-	url := 'http://localhost:8082/controller/product'
+	url := 'http://localhost:${port}/controller/product'
 
 	mut config := http.FetchConfig{
 		header: header

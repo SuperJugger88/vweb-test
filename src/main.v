@@ -4,7 +4,7 @@ import vweb
 import databases
 import os
 
-const port = 8082
+const port = os.getenv_opt("APP_PORT") or {"8082"}.int()
 
 struct App {
     vweb.Context
@@ -33,7 +33,12 @@ fn main() {
     app.serve_static('/favicon.ico', 'src/assets/favicon.ico')
     app.mount_static_folder_at(os.resource_abs_path('.'), '/')
 
-    vweb.run(app, port)
+	vweb.run_at(app, vweb.RunParams{
+		port: port
+		host: '0.0.0.0'
+		family: .ip
+	}) or { panic(err) }
+
 }
 
 pub fn (mut app App) index() vweb.Result {
